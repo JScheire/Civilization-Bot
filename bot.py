@@ -2,18 +2,75 @@ import discord
 import random
 from discord.ext import commands
 
-TOKEN = 'Njk3MTkyNDIxMDk1NjM3MDYy.XoztHQ.yK5lsoLlJAKX5Cl06n9r-PArH5U'
+TOKEN = 'Njk3MTkyNDIxMDk1NjM3MDYy.Xo0Ltw.I0BpxIvTOhNd9lr8QCBl7LkB7Gk'
 
 client = commands.Bot(command_prefix = '!')
+
+civs = ['America',
+            'Arabia',
+            'Australia',
+            'Aztec',
+            'Brazil',
+            'Canada',
+            'China',
+            'Egypt',
+            'England',
+            'France',
+            'Germany',
+            'Greece',
+            'India',
+            'Indonesia',
+            'Japan',
+            'Kongo',
+            'Khmer',
+            'Macedon',
+            'Norway',
+            'Poland',
+            'Persia',
+            'Rome',
+            'Russia',
+            'Scythia',
+            'Spain',
+            'Sumeria',
+            'Mongolia',
+            'Cree',
+            'Korea',
+            'Netherlands',
+            'Nubia',
+            'Ottomans',
+            'Georgia',
+            'Scotland',
+            'Mapuche',
+            'Zulu',
+            'Hungary',
+            'Maori',
+            'Inca',
+            'Mali',
+            'Sweden'
+        ]
 
 @client.event
 async def on_ready():
     print('Bot is ready.')
 
 @client.command()
-async def draft(ctx, players):
+async def list(ctx):
     result = ''
-    counter = 0
+    result += civs[0]
+    for i in range(1, len(civs)):
+        result += (', ' + civs[i])
+    
+    await ctx.send(result)
+
+@client.command()
+async def ban(ctx, banned):
+    civs.remove(banned)
+
+    await ctx.send(f'{banned} has been banned!')
+
+@client.command()
+async def reset(ctx):
+    global civs
     civs = ['America',
             'Arabia',
             'Australia',
@@ -57,12 +114,23 @@ async def draft(ctx, players):
             'Sweden'
         ]
 
+    await ctx.send('Civs have been reset.')
+
+@client.command()
+async def draft(ctx, players):
+    result = ''
+    counter = 0
     civlist = random.sample(civs, 3 * int(players))    
 
-    for i in  range(0, int(players)):
+    for i in range(0, int(players)):
         result += (f'Player {i + 1}: {civlist[counter]} {civlist[counter + 1]} {civlist[counter + 2]}\n') 
         counter += 3
     
     await ctx.send(result)
+
+@client.event
+async def on_command_error(ctx, error):
+    await ctx.send(f'Error: Type !help')
+
 
 client.run(TOKEN)
