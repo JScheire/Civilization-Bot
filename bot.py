@@ -2,7 +2,8 @@ import discord
 import random
 from discord.ext import commands
 
-TOKEN = 'Njk3MTkyNDIxMDk1NjM3MDYy.Xo0Ltw.I0BpxIvTOhNd9lr8QCBl7LkB7Gk'
+key = open('key.txt', 'r')
+TOKEN = key.read()
 
 client = commands.Bot(command_prefix = '!')
 
@@ -126,7 +127,16 @@ async def draft(ctx, players):
         result += (f'Player {i + 1}: {civlist[counter]} {civlist[counter + 1]} {civlist[counter + 2]}\n') 
         counter += 3
     
+
     await ctx.send(result)
+
+@client.command()
+async def gay(ctx):
+    await ctx.send(file = discord.File('smax.jpg'))
+
+@client.command()
+async def toes(ctx):
+    await ctx.send(':weary:')
 
 @client.event
 async def on_command_error(ctx, error):
