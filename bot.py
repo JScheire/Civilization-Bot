@@ -65,8 +65,7 @@ async def list(ctx):
 
 @client.command()
 async def ban(ctx, banned):
-    lowerciv = [x.lower() for x in civs]
-    lowerciv.remove(banned.lower())
+    civs.remove(banned.capitalize())
 
     await ctx.send(f'{banned.capitalize()} has been banned!')
 
@@ -122,11 +121,11 @@ async def reset(ctx):
 async def draft(ctx, players):
     result = ''
     counter = 0
-    civlist = random.sample(civs, 3 * int(players))    
+    civlist = random.sample(civs, 5 * int(players))    
 
     for i in range(0, int(players)):
-        result += (f'Player {i + 1}: {civlist[counter]} {civlist[counter + 1]} {civlist[counter + 2]}\n') 
-        counter += 3
+        result += (f'Player {i + 1}: {civlist[counter]} {civlist[counter + 1]} {civlist[counter + 2]} {civlist[counter + 3]} {civlist[counter + 4]}\n') 
+        counter += 5
     
 
     await ctx.send(result)
