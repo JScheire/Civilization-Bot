@@ -65,9 +65,10 @@ async def list(ctx):
 
 @client.command()
 async def ban(ctx, banned):
-    civs.remove(banned)
+    lowerciv = [x.lower() for x in civs]
+    lowerciv.remove(banned.lower())
 
-    await ctx.send(f'{banned} has been banned!')
+    await ctx.send(f'{banned.capitalize()} has been banned!')
 
 @client.command()
 async def reset(ctx):
