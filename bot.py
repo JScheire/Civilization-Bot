@@ -135,6 +135,10 @@ async def gay(ctx):
     await ctx.send(file = discord.File('smax.jpg'))
 
 @client.command()
+async def picklerick(ctx):
+    await ctx.send(file = discord.File('pickle.png'))
+
+@client.command()
 async def toes(ctx):
     await ctx.send(':weary:')
 
